@@ -10,35 +10,46 @@ export default class Home extends Component {
     complete: false
   };
   build = () => {
-    this.inner.childNodes.forEach((node, i) => {
-      console.log(node.nodeName);
-      const back = "-=0.8";
-      if (node.nodeName === "H1") {
-        new Epitaph(node);
-        this.initial.staggerFrom(
-          node.childNodes,
-          1,
-          {
-            y: 100,
-            opacity: 0,
-            ease: Power4.easeOut
-          },
-          0.05,
-          i === 0 ? null : back
-        );
-      } else {
-        this.initial.from(
-          node,
-          1,
-          {
-            y: 100,
-            opacity: 0,
-            ease: Power4.easeOut
-          },
-          i === 0 ? null : back
-        );
-      }
-    });
+    // this.inner.childNodes.forEach((node, i) => {
+    //   console.log(node.nodeName);
+    //   const back = "-=0.8";
+    //   if (node.nodeName === "H1") {
+    //     new Epitaph(node);
+    //     this.initial.staggerFrom(
+    //       node.childNodes,
+    //       1,
+    //       {
+    //         y: 100,
+    //         opacity: 0,
+    //         ease: Power4.easeOut
+    //       },
+    //       0.05,
+    //       i === 0 ? null : back
+    //     );
+    //   } else {
+    //     this.initial.from(
+    //       node,
+    //       1,
+    //       {
+    //         y: 100,
+    //         opacity: 0,
+    //         ease: Power4.easeOut
+    //       },
+    //       i === 0 ? null : back
+    //     );
+    //   }
+
+    // });
+    this.initial.staggerFrom(
+      this.inner.childNodes,
+      2,
+      {
+        y: 200,
+        opacity: 0,
+        ease: Power4.easeOut
+      },
+      0.05
+    );
     this.initial.eventCallback("onComplete", () => {
       this.setState({
         complete: true
