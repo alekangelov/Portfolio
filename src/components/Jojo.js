@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import menace from "../assets/do_do.png";
-import { TimelineMax, SteppedEase, TweenLite, RoughEase } from "gsap";
+import { SteppedEase, TweenLite, RoughEase } from "gsap";
 
 export default class Jojo extends Component {
   componentDidMount() {

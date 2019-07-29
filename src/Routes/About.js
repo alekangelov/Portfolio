@@ -6,7 +6,11 @@ const Intro = () => (
   <>
     <h1 className="title">ABOUT</h1>
     <p>
-      Hi, I'm Alek 👋! I'm currently the lead Front End Developer over at{" "}
+      Hi, I'm Alek{" "}
+      <span role="img" aria-label="wave">
+        👋
+      </span>
+      ! I'm currently the lead Front End Developer over at{" "}
       <a href="https://digitalpresent.io">DigitalPresent.io</a>. I'm based out
       of Skopje with a huge emphasis on animation, UI/UX and interaction design.
     </p>
@@ -80,9 +84,16 @@ const Me = () => (
     <h2>Persona</h2>
 
     <p>
-      Yo, you got this far 👀? To be really honest, it's quite a boring, long
-      page with vague pictures of me and I honestly would be surprised if anyone
-      got here 😂.
+      Yo, you got this far{" "}
+      <span role="img" aria-label="eyes">
+        👀
+      </span>
+      ? To be really honest, it's quite a boring, long page with vague pictures
+      of me and I honestly would be surprised if anyone got here{" "}
+      <span role="img" aria-label="laughing">
+        😂
+      </span>
+      .
     </p>
     <p>
       I live in the Cevahir Sky City Skyscrapers in Skopje on the 21st floor. My
@@ -273,6 +284,7 @@ export default class About extends Component {
             {this.state.images.map((image, i) => {
               return (
                 <img
+                  key={i}
                   src={image}
                   style={{
                     opacity: this.state.index === i ? 1 : 0

@@ -399,6 +399,24 @@ a {
 }
 
 h1.title {
+  &.invert {
+    -webkit-text-stroke: 1px white;
+    color: transparent;
+    font-family: $font;
+    font-size: 6rem;
+    font-weight: 100;
+    width: max-content;
+    -webkit-background-clip: text;
+    overflow: hidden;
+    transition: 0.1s color;
+    &:hover {
+      color: white;
+    }
+    &:after {
+      background: black;
+      -webkit-background-clip: text;
+    }
+  }
   position: relative;
   -webkit-text-stroke: 0px black;
   color: black;
@@ -409,7 +427,6 @@ h1.title {
     transform: translateY(-100%) scaleX(1);
   }
   &:before {
-    content: "";
     width: 0px;
     transition: 0.5s width;
     display: inline-block;
@@ -431,4 +448,32 @@ h1.title {
 
 .noOpacity {
   opacity: 0;
+}
+
+#mount {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  canvas {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.contact {
+  p,
+  h2 {
+    color: white;
+  }
+  h2 {
+    margin: 2rem 0 0 0;
+  }
+  a {
+    -webkit-text-stroke: 0;
+    color: white;
+  }
 }

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { TimelineMax, Power4 } from "gsap";
-import Epitaph from "epitaphjs";
+// import Epitaph from "epitaphjs";
 import Jojo from "../components/Jojo";
 
 export default class Home extends Component {

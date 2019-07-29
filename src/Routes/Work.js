@@ -4,11 +4,7 @@ import { TweenLite, Power4, TimelineMax, TweenMax } from "gsap";
 class Project extends Component {
   componentDidMount() {
     const { width, height } = this.actual.getBoundingClientRect();
-    const {
-      width: wrapperWidth,
-      height: wrapperHeight,
-      top
-    } = this.wrapper.getBoundingClientRect();
+    const { height: wrapperHeight, top } = this.wrapper.getBoundingClientRect();
     TweenLite.set(this.video, {
       x: window.innerWidth / 2 - width / 2,
       y: top + wrapperHeight / 2 - height / 2,
@@ -85,8 +81,8 @@ export default class Work extends Component {
           <div className="projects" ref={ref => (this.projects = ref)}>
             {Array(5)
               .fill()
-              .map(x => {
-                return <Project />;
+              .map((x, i) => {
+                return <Project key={i} />;
               })}
           </div>
         </div>

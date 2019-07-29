@@ -3,11 +3,7 @@ import Routes from "./Routes";
 import "./assets/style.scss";
 
 function App() {
-  return (
-    <div className="App">
-      <Routes />
-    </div>
-  );
+  return <Routes />;
 }
 
 export default App;
