@@ -14,6 +14,7 @@ export default class Contact extends Component {
               Boulevar Srbija #11, Cevahir Sky City Block B
             </a>
           </p>
+          <p>Skopje, North Macedonia</p>
           <h2>Phone</h2>
           <p>
             <a href="tel:0038977968718">+389 77 968 718</a>
