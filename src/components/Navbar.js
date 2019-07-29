@@ -60,11 +60,12 @@ class Navbar extends Component {
   }
   onClick = async e => {
     e.preventDefault();
+    window.scrollTo(0, 0);
     this.setState({
       opened: false
     });
     const to = e.target.getAttribute("href");
-    await delay(1);
+    await delay(0.9);
     this.props.history.push(to);
   };
   render() {

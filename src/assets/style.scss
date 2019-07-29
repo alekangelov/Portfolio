@@ -318,3 +318,117 @@ a {
     background: black;
   }
 }
+
+.about {
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  &-image {
+    width: 50%;
+    left: 0;
+    position: absolute;
+    top: 10rem;
+    z-index: -1;
+    img {
+      width: 100%;
+      position: absolute;
+      transition: 0.5s opacity;
+    }
+  }
+  &-text {
+    flex: 0 1 60%;
+    width: 60%;
+    margin: 0 0 0 -10%;
+    background: white;
+    padding: 5rem;
+    background-blend-mode: exclusion;
+    h1 {
+      font-family: $font;
+      font-weight: 100;
+      -webkit-text-stroke: 1px black;
+      color: transparent;
+      font-size: 6rem;
+    }
+    h2 {
+      font-family: $font;
+      font-weight: 100;
+      -webkit-text-stroke: 1px black;
+      color: transparent;
+      font-size: 3rem;
+      &:hover {
+        color: black;
+        -webkit-text-stroke: 0px black;
+      }
+    }
+    ol li {
+      margin: 2rem 0;
+      font-weight: 600;
+      font-size: 1.4rem;
+      div {
+        margin-top: 2rem;
+        h4 {
+          font-size: 1.6rem;
+        }
+        p {
+          font-weight: 300;
+          margin-top: 0rem;
+        }
+        a {
+          -webkit-text-stroke: 0;
+          color: black;
+          text-transform: none;
+          font-weight: 100;
+          display: block;
+        }
+      }
+      ol {
+        list-style-type: disc;
+        margin-left: 2rem;
+      }
+    }
+    p,
+    h1,
+    h2,
+    ol {
+      margin: 3rem 0;
+    }
+    p {
+      font-size: 1.4rem;
+    }
+  }
+}
+
+h1.title {
+  position: relative;
+  -webkit-text-stroke: 0px black;
+  color: black;
+  &:before {
+    width: 0px;
+  }
+  &:after {
+    transform: translateY(-100%) scaleX(1);
+  }
+  &:before {
+    content: "";
+    width: 0px;
+    transition: 0.5s width;
+    display: inline-block;
+    height: 1px;
+  }
+  &:after {
+    position: absolute;
+    width: 100%;
+    height: 10px;
+    content: "";
+    background: white;
+    transition: 0.2s transform;
+    left: 0;
+    top: 50%;
+    transform: translateY(-100%) scaleX(1);
+    transform-origin: center left;
+  }
+}
+
+.noOpacity {
+  opacity: 0;
+}
