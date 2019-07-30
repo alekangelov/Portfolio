@@ -78,6 +78,7 @@ class Background extends Component {
     }
   };
   componentDidMount() {
+    window.addEventListener("resize", this.ReSize);
     this.scene = new THREE.Scene();
     this.geometry();
     this.lights();
@@ -88,20 +89,28 @@ class Background extends Component {
     this.renderer.setPixelRatio(window.devicePixelRatio);
     this.renderer.setClearColor("black");
     this.camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
-    TweenLite.to(this.camera.position, 5, {
-      x: 500,
-      y: 500,
-      z: 750,
-      ease: Power4.easeOut
-    });
     this.renderer.setSize(width, height);
     this.effects();
     this.mount.appendChild(this.renderer.domElement);
-    window.addEventListener("mousemove", this.cameraMove);
+    if (window.DeviceOrientationEvent && "ontouchstart" in window) {
+      window.addEventListener(
+        "deviceorientation",
+        this._handleDeviceOrientation
+      );
+    } else {
+      window.addEventListener("mousemove", this.cameraMove);
+    }
     this.animate();
   }
   componentWillUnmount() {
-    window.removeEventListener("mousemove", this.cameraMove);
+    if (window.DeviceOrientationEvent && "ontouchstart" in window) {
+      window.removeEventListener(
+        "deviceorientation",
+        this._handleDeviceOrientation
+      );
+    } else {
+      window.removeEventListener("mousemove", this.cameraMove);
+    }
     cancelAnimationFrame(this.animate);
   }
   clock = new THREE.Clock();
@@ -121,6 +130,20 @@ class Background extends Component {
       ...move,
       ease: Power4.easeOut
     });
+  };
+  _handleDeviceOrientation = event => {
+    if (event) {
+      const x = linear(event.beta, -180, 180, -0.2, 0.2);
+      const y = linear(event.gamma, -90, 90, -0.2, 0.2);
+      if (this.object) {
+        TweenLite.to(this.camera.rotation, 0.6, {
+          x: x,
+          y: y,
+          ease: Power4.easeOut
+        });
+      }
+    } else {
+    }
   };
   render() {
     return (

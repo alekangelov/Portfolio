@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { TimelineMax, Power4 } from "gsap";
 // import Epitaph from "epitaphjs";
 import Jojo from "../components/Jojo";
+import HomeBG from "../components/HomeBg";
 
 export default class Home extends Component {
   initial = new TimelineMax({ paused: true });
@@ -63,8 +64,9 @@ export default class Home extends Component {
   render() {
     return (
       <div className="full">
-        <Jojo display={this.state.jojos} />
         <div className="main wrapper">
+          <Jojo display={this.state.jojos} />
+
           <div ref={ref => (this.inner = ref)}>
             <h1>Developer</h1>
             <h4>I code</h4>
@@ -95,6 +97,7 @@ export default class Home extends Component {
             </h4>
           </div>
         </div>
+        <HomeBG />
       </div>
     );
   }

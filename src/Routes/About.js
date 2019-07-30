@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { TweenLite, Power4, TweenMax } from "gsap";
 import InViewMonitor from "react-inview-monitor";
 
+console.warn = null;
+
 const Intro = () => (
   <>
     <h1 className="title">ABOUT</h1>
