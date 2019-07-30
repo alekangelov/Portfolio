@@ -12,6 +12,7 @@ import {
   NoiseEffect,
   BlendFunction
 } from "postprocessing";
+import { gpuDetect } from "./gpuDetect";
 
 class Background extends Component {
   geometry = () => {
@@ -86,7 +87,9 @@ class Background extends Component {
     this.renderer = new THREE.WebGLRenderer({
       antialias: true
     });
-    this.renderer.setPixelRatio(window.devicePixelRatio);
+    if (gpuDetect().any) {
+      this.renderer.setPixelRatio(window.devicePixelRatio);
+    }
     this.renderer.setClearColor("black");
     this.camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
     TweenLite.to(this.camera.position, 5, {

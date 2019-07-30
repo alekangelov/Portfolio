@@ -251,6 +251,7 @@ export default class About extends Component {
     index: 0
   };
   componentDidMount() {
+    document.title = "What I'm About. -Alek";
     window.addEventListener("scroll", this.onScroll);
     TweenLite.from(this.image, 2, {
       y: 200,
@@ -328,6 +329,7 @@ const OnView = ({ children, onInView }) => {
     <InViewMonitor
       classNameInView="noOpacity"
       classNameNotInView="noOpacity"
+      repeatOnInView={true}
       onInView={e => {
         if (onInView) {
           onInView();

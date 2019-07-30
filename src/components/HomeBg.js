@@ -13,6 +13,7 @@ import {
   NoiseEffect,
   BlendFunction
 } from "postprocessing";
+import { gpuDetect } from "./gpuDetect";
 class HomeBG extends Component {
   weird = () => {
     const scene1 = [
@@ -33,7 +34,7 @@ class HomeBG extends Component {
   geometry = () => {
     const loader = new GLTFLoader();
     var geometry = new THREE.BoxGeometry(10, 8, 3);
-    var material = new THREE.MeshToonMaterial({ color: "black" });
+    var material = new THREE.MeshPhongMaterial({ color: "white" });
     var cube = new THREE.Mesh(geometry, material);
     cube.receiveShadow = true;
     cube.position.set(5, -5, -1.5);
@@ -62,6 +63,11 @@ class HomeBG extends Component {
           this.animation = this.mixer.clipAction(clip);
           this.animation.setLoop(THREE.LoopOnce);
           this.animation.clampWhenFinished = true;
+        }
+      });
+      model.scene.traverse(node => {
+        if (node.isObject3D) {
+          node.castShadow = true;
         }
       });
       model.scene.scale.set(1, 1, 1);
@@ -110,7 +116,7 @@ class HomeBG extends Component {
                   {
                     x: 0,
                     y: 3,
-                    z: -2
+                    z: -2.5
                   },
                   {
                     ...positions[rando],
@@ -127,11 +133,10 @@ class HomeBG extends Component {
     });
   };
   lights = () => {
-    const light = new THREE.PointLight("white", 1.3);
-    light.position.set(0, 1.5, -3.2);
+    const light = new THREE.PointLight("white", 4);
+    light.position.set(-1.2, 1.5, -3.2);
     light.rotation.set(-1, 0, 0);
     light.castShadow = true;
-    console.log(light);
     this.scene.add(light);
   };
   effects = () => {
@@ -171,8 +176,12 @@ class HomeBG extends Component {
     this.renderer = new THREE.WebGLRenderer({
       antialias: true
     });
-    this.renderer.setPixelRatio(window.devicePixelRatio);
+    if (gpuDetect().any) {
+      this.renderer.setPixelRatio(window.devicePixelRatio);
+    }
     this.renderer.setClearColor("white");
+    this.renderer.shadowMap.enabled = true;
+
     this.camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 50000);
     this.geometry();
     this.lights();

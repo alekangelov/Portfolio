@@ -58,6 +58,8 @@ export default class Home extends Component {
     });
   };
   componentDidMount() {
+    document.title = "Alek Angelov. Developer, Designer.";
+
     this.build();
     this.initial.play();
   }

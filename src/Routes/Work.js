@@ -61,6 +61,8 @@ class Project extends Component {
 export default class Work extends Component {
   openTL = new TimelineMax({ paused: true });
   componentDidMount() {
+    document.title = "What I've done. -Alek";
+
     this.openTL.staggerFrom(
       this.projects.childNodes,
       2,

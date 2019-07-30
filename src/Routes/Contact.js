@@ -1,12 +1,38 @@
 import React, { Component } from "react";
 import Background from "../components/bg";
+import { TweenMax, Power4 } from "gsap";
+import { withRouter } from "react-router-dom";
 
-export default class Contact extends Component {
+class Contact extends Component {
+  componentDidMount() {
+    document.title = "Contact Me. -Alek";
+    TweenMax.staggerFrom(
+      this.inner.childNodes,
+      1,
+      {
+        y: 200,
+        opacity: 0,
+        ease: Power4.easeOut
+      },
+      0.05
+    );
+  }
+  GoTOAI = () => {
+    TweenMax.to(this.full, 2, {
+      y: -200,
+      opacity: 0,
+      display: "none",
+      ease: Power4.easeOut,
+      onComplete: () => {
+        this.props.history.push("/ai");
+      }
+    });
+  };
   render() {
     return (
-      <div className="full">
+      <div className="full" ref={ref => (this.full = ref)}>
         <Background />
-        <div className="contact wrapper">
+        <div ref={ref => (this.inner = ref)} className="contact wrapper">
           <h1 className="title invert">CONTACT</h1>
           <h2>Address</h2>
           <p>
@@ -23,8 +49,11 @@ export default class Contact extends Component {
           <p>
             <a href="mailto:alekangelov@outlook.com">alekangelov@outlook.com</a>
           </p>
+          <button onClick={this.GoTOAI}>Got a project in mind?</button>
         </div>
       </div>
     );
   }
 }
+
+export default withRouter(Contact);
