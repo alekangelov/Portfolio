@@ -59,8 +59,11 @@ class Navbar extends Component {
     }
   }
   onClick = async e => {
+    window.scrollTo({
+      top: 0,
+      behavior: "auto"
+    });
     e.preventDefault();
-    window.scrollTo(0, 0);
     this.setState({
       opened: false
     });
