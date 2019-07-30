@@ -81,45 +81,47 @@ class HomeBG extends Component {
       const zoom = {
         value: 1
       };
-      TweenLite.to(zoom, 5, {
-        value: 2,
-        onUpdate: () => {
-          this.camera.zoom = zoom.value;
-          this.camera.updateProjectionMatrix();
-        }
-      });
-      TweenLite.fromTo(
-        this.camera.position,
-        5,
-        {
-          y: -6,
-          x: -5
-        },
-        {
-          y: 0.5,
-          x: 0.5,
-          z: 3,
-          ease: Power4.easeOut,
-          onStart: () => {
-            setTimeout(() => {
-              this.animation.play();
-              TweenLite.fromTo(
-                model.scene.position,
-                1,
-                {
-                  x: 0,
-                  y: 3,
-                  z: -2
-                },
-                {
-                  ...positions[rando],
-                  ease: Power4.easeOut
-                }
-              );
-            }, 900);
+      if (this.camera) {
+        TweenLite.to(zoom, 5, {
+          value: 2,
+          onUpdate: () => {
+            this.camera.zoom = zoom.value;
+            this.camera.updateProjectionMatrix();
           }
-        }
-      );
+        });
+        TweenLite.fromTo(
+          this.camera.position,
+          5,
+          {
+            y: -6,
+            x: -5
+          },
+          {
+            y: 0.5,
+            x: 0.5,
+            z: 3,
+            ease: Power4.easeOut,
+            onStart: () => {
+              setTimeout(() => {
+                this.animation.play();
+                TweenLite.fromTo(
+                  model.scene.position,
+                  1,
+                  {
+                    x: 0,
+                    y: 3,
+                    z: -2
+                  },
+                  {
+                    ...positions[rando],
+                    ease: Power4.easeOut
+                  }
+                );
+              }, 900);
+            }
+          }
+        );
+      }
       model.scene.rotation.set(0, 10, 0);
       this.scene.add(model.scene);
     });
@@ -196,6 +198,8 @@ class HomeBG extends Component {
     }
   }
   componentWillUnmount() {
+    window.removeEventListener("resize", this.ReSize);
+
     if (window.DeviceOrientationEvent && "ontouchstart" in window) {
       window.removeEventListener(
         "deviceorientation",
@@ -206,6 +210,8 @@ class HomeBG extends Component {
     }
     cancelAnimationFrame(this.animate);
     this.clock.stop();
+    this.renderer.dispose();
+    this.scene.dispose();
   }
   clock = new THREE.Clock();
   animate = () => {
@@ -227,16 +233,13 @@ class HomeBG extends Component {
   };
   _handleDeviceOrientation = event => {
     if (event) {
-      const x = linear(event.beta, -180, 180, -0.2, 0.2);
-      const y = linear(event.gamma, -90, 90, -0.2, 0.2);
-      if (this.object) {
-        TweenLite.to(this.camera.rotation, 0.6, {
-          x: x,
-          y: y,
-          ease: Power4.easeOut
-        });
-      }
-    } else {
+      const x = linear(event.beta, -180, 180, -1, 1);
+      const y = linear(event.gamma, -90, 90, -1, 1);
+      TweenLite.to(this.camera.rotation, 0.6, {
+        x: x,
+        y: y,
+        ease: Power4.easeOut
+      });
     }
   };
   render() {

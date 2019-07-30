@@ -55,7 +55,7 @@ class Background extends Component {
   effects = () => {
     this.composer = new EffectComposer(this.renderer);
     const noise = new NoiseEffect({
-      blendFunction: BlendFunction.COLOR_DODGE,
+      blendFunction: BlendFunction.ADD,
       opacity: 0.1
     });
     noise.blendMode.opacity.value = 0.2;
@@ -89,6 +89,12 @@ class Background extends Component {
     this.renderer.setPixelRatio(window.devicePixelRatio);
     this.renderer.setClearColor("black");
     this.camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+    TweenLite.to(this.camera.position, 5, {
+      x: 500,
+      y: 500,
+      z: 750,
+      ease: Power4.easeOut
+    });
     this.renderer.setSize(width, height);
     this.effects();
     this.mount.appendChild(this.renderer.domElement);
@@ -103,6 +109,8 @@ class Background extends Component {
     this.animate();
   }
   componentWillUnmount() {
+    window.removeEventListener("resize", this.ReSize);
+
     if (window.DeviceOrientationEvent && "ontouchstart" in window) {
       window.removeEventListener(
         "deviceorientation",
@@ -112,6 +120,9 @@ class Background extends Component {
       window.removeEventListener("mousemove", this.cameraMove);
     }
     cancelAnimationFrame(this.animate);
+    this.clock.stop();
+    this.renderer.dispose();
+    this.scene.dispose();
   }
   clock = new THREE.Clock();
   animate = () => {
@@ -133,16 +144,13 @@ class Background extends Component {
   };
   _handleDeviceOrientation = event => {
     if (event) {
-      const x = linear(event.beta, -180, 180, -0.2, 0.2);
-      const y = linear(event.gamma, -90, 90, -0.2, 0.2);
-      if (this.object) {
-        TweenLite.to(this.camera.rotation, 0.6, {
-          x: x,
-          y: y,
-          ease: Power4.easeOut
-        });
-      }
-    } else {
+      const x = linear(event.beta, -180, 180, -1, 1);
+      const y = linear(event.gamma, -90, 90, -1, 1);
+      TweenLite.to(this.camera.rotation, 0.6, {
+        x: x,
+        y: y,
+        ease: Power4.easeOut
+      });
     }
   };
   render() {

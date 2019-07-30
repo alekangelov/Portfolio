@@ -107,7 +107,7 @@ const Me = () => (
     <p>
       In the evening, after work, I go to the gym. Where I follow a powerlifting
       program designed to make me stronger. I can deadlift about 405lbs, now.
-      After the gym, I go to the sauna for 10minutes to open my pores so I can
+      After the gym, I go to the sauna for 10 minutes to open my pores so I can
       clean them easier to prevent build up in my skin. After the sauna, I
       shower with a body exfoliator to keep my skin healthy and clean.
     </p>
