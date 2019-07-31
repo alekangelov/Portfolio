@@ -78,6 +78,12 @@ class Background extends Component {
       this.composer.addPass(effectPass);
     }
   };
+  ReSize = () => {
+    const { clientWidth: width, clientHeight: height } = this.mount;
+    this.renderer.setSize(width, height);
+    this.camera.aspect = width / height;
+    this.camera.updateProjectionMatrix();
+  };
   componentDidMount() {
     window.addEventListener("resize", this.ReSize);
     this.scene = new THREE.Scene();
