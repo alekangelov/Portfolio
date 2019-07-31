@@ -329,7 +329,6 @@ export default class About extends Component {
 
 const OnView = ({ children, onInView }) => {
   const [hasntHappened = true, setHasntHappened] = useState(true);
-  console.log(hasntHappened);
   return (
     <InViewMonitor
       classNameInView="noOpacity"

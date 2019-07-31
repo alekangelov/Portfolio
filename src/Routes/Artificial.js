@@ -138,11 +138,8 @@ export default class Artificial extends Component {
           });
         }
         if (this.state.subStep < this.steps.project.length - 1) {
-          console.log("1");
           this.change({ substep: true });
         } else {
-          console.log("2");
-
           this.change({
             step: "final"
           });
@@ -187,7 +184,6 @@ export default class Artificial extends Component {
       this.state.formStep === "project"
         ? this.steps[this.state.formStep][this.state.subStep]
         : this.steps[this.state.formStep];
-    console.log(step, this.state);
     return (
       <div className="full">
         <div className="spacing" />

@@ -53,12 +53,10 @@ class HomeBG extends Component {
       require("../assets/models/fall.glb")
     ];
     const rando = 0;
-    console.log(rando);
     loader.load(models[rando], model => {
       this.mixer = new THREE.AnimationMixer(model.scene);
       this.clips = model.animations;
       this.clips.forEach(clip => {
-        console.log(clip);
         if (!this.animation) {
           this.animation = this.mixer.clipAction(clip);
           this.animation.setLoop(THREE.LoopOnce);
