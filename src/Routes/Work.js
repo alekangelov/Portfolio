@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { TweenLite, Power4, TimelineMax, TweenMax } from "gsap";
+import Projects from "../assets/Projects";
 
 class Project extends Component {
   componentDidMount() {
@@ -40,18 +41,13 @@ class Project extends Component {
       >
         <div className="img" ref={ref => (this.video = ref)}>
           <video loop ref={ref => (this.actual = ref)} autoPlay>
-            <source src={require("../assets/project.mp4")} type="video/mp4" />>
+            <source src={this.props.video} type="video/mp4" />>
           </video>
         </div>
         <div ref={ref => (this.text = ref)} className="projects-text">
-          <h1>The title of the project</h1>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum eius
-            dolorum dolores harum, vero magnam aspernatur autem excepturi iure
-            provident, eos quasi. Eveniet, quae. Nostrum quis facilis quaerat
-            perspiciatis et!
-          </p>
-          <a href="#">Visit Project</a>
+          <h1>{this.props.title}</h1>
+          <p>{this.props.text}</p>
+          {this.props.link ? <a href={this.props.link}>Visit Project</a> : null}
         </div>
       </div>
     );
@@ -81,11 +77,9 @@ export default class Work extends Component {
       <div className="full">
         <div className="wrapper">
           <div className="projects" ref={ref => (this.projects = ref)}>
-            {Array(5)
-              .fill()
-              .map((x, i) => {
-                return <Project key={i} />;
-              })}
+            {Projects.map((x, i) => {
+              return <Project key={i} {...x} />;
+            })}
           </div>
         </div>
       </div>

@@ -120,7 +120,20 @@ class HomeBG extends Component {
                   },
                   {
                     ...positions[rando],
-                    ease: Power4.easeOut
+                    ease: Power4.easeOut,
+                    onComplete: () => {
+                      if (
+                        window.DeviceOrientationEvent &&
+                        "ontouchstart" in window
+                      ) {
+                        window.addEventListener(
+                          "deviceorientation",
+                          this._handleDeviceOrientation
+                        );
+                      } else {
+                        window.addEventListener("mousemove", this.cameraMove);
+                      }
+                    }
                   }
                 );
               }, 900);
@@ -192,14 +205,6 @@ class HomeBG extends Component {
     // this.scene.overrideMaterial = new THREE.MeshToonMaterial({
     //   color: "grey"
     // });
-    if (window.DeviceOrientationEvent && "ontouchstart" in window) {
-      window.addEventListener(
-        "deviceorientation",
-        this._handleDeviceOrientation
-      );
-    } else {
-      window.addEventListener("mousemove", this.cameraMove);
-    }
     this.animate();
     if (!window.scene && !window.THREE) {
       window.scene = this.scene;
