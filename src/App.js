@@ -53,7 +53,7 @@ class Loading extends React.Component {
           id="svg"
           width="200"
           height="200"
-          viewPort="0 0 100 100"
+          viewport="0 0 100 100"
           version="1.1"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -62,8 +62,8 @@ class Loading extends React.Component {
             cx="100"
             cy="100"
             fill="transparent"
-            stroke-dasharray="565.48"
-            stroke-dashoffset="0"
+            strokeDasharray="565.48"
+            strokeDashoffset="0"
           />
           <circle
             ref={ref => (this.circle = ref)}
@@ -72,8 +72,8 @@ class Loading extends React.Component {
             cx="100"
             cy="100"
             fill="transparent"
-            stroke-dasharray={this.state.array}
-            stroke-dashoffset="200"
+            strokeDasharray={this.state.array}
+            strokeDashoffset="200"
           />
         </svg>
       </div>

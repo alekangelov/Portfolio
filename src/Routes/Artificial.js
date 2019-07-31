@@ -1,6 +1,35 @@
 import React, { Component } from "react";
 import { TweenLite, Power4, TimelineMax } from "gsap";
 import { Slider, Handles } from "react-compound-slider";
+
+function sprites(audio, spriteData) {
+  var audioSprite = audio;
+
+  // sprite data
+  var spriteData = spriteData;
+
+  // current sprite being played
+  var currentSprite = {};
+
+  // time update handler to ensure we stop when a sprite is complete
+  var onTimeUpdate = function() {
+    if (this.currentTime >= currentSprite.start + currentSprite.length) {
+      this.pause();
+    }
+  };
+  audioSprite.addEventListener("timeupdate", onTimeUpdate, false);
+
+  // in mobile Safari, the first time this is called will load the audio. Ideally, we'd load the audio file completely before doing this.
+  var playSprite = function(id) {
+    if (spriteData[id] && spriteData[id].length) {
+      currentSprite = spriteData[id];
+      audioSprite.currentTime = currentSprite.start;
+      audioSprite.play();
+    }
+  };
+  return playSprite;
+}
+
 const Handle = ({
   // your handle component
   handle: { id, value, percent },
@@ -44,6 +73,88 @@ export default class Artificial extends Component {
     formStep: "initial",
     subStep: 0
   };
+  audio = {
+    normal: {
+      audio: require("../assets/audio/normal.mp3"),
+      points: {
+        initial: {
+          start: 0.1,
+          length: 5
+        },
+        project: {
+          start: 6,
+          length: 4
+        },
+        describe: {
+          start: 10,
+          length: 3
+        },
+        final: {
+          start: 13,
+          length: 6
+        },
+        sent: {
+          start: 19,
+          length: 8
+        }
+      }
+    },
+    surfer: {
+      audio: require("../assets/audio/surfer.mp3"),
+      points: {
+        initial: {
+          start: 0,
+          length: 7
+        },
+        project: {
+          start: 8,
+          length: 5
+        },
+        describe: {
+          start: 15,
+          length: 5
+        },
+        final: {
+          start: 20,
+          length: 7
+        },
+        sent: {
+          start: 27,
+          length: 10
+        }
+      }
+    },
+    robot: {
+      audio: require("../assets/audio/robot.mp3"),
+      points: {
+        initial: {
+          start: 0,
+          length: 7
+        },
+        project: {
+          start: 9.4,
+          length: 5
+        },
+        describe: {
+          start: 16,
+          length: 5
+        },
+        final: {
+          start: 23,
+          length: 10
+        },
+        sent: {
+          start: 33,
+          length: 10
+        }
+      }
+    }
+  };
+  random = () => {
+    const voices = ["normal", "surfer", "robot"];
+
+    return voices[Math.floor(Math.random() * voices.length)];
+  };
   build = () => {
     this.switchTL.staggerFrom(
       this.inner.childNodes,
@@ -56,7 +167,38 @@ export default class Artificial extends Component {
       0.1
     );
   };
-  componentDidMount() {
+  componentDidUpdate(prevProps, prevState) {
+    if (
+      prevState.formStep !== this.state.formStep ||
+      this.state.subStep !== prevState.subStep
+    ) {
+      if (this.state.formStep === "project") {
+        switch (this.state.subStep) {
+          case 1:
+            this.sprites("describe");
+            break;
+          case 2:
+            this.sprites("final");
+            break;
+
+          default:
+            this.sprites("project");
+
+            break;
+        }
+      } else {
+        this.sprites(this.state.formStep);
+      }
+    }
+  }
+  srpiteStart = audio => {
+    this.sprites = sprites(this.voice, this.audio[audio].points);
+    this.sprites("initial");
+  };
+  async componentDidMount() {
+    const audio = await this.random();
+    this.voice = await new Audio(this.audio[audio].audio);
+    this.voice.onload = this.srpiteStart(audio);
     this.build();
     this.switchTL.play();
     this.micInterval = setInterval(() => {
@@ -107,6 +249,9 @@ export default class Artificial extends Component {
         this.switchTL.play();
       }, 1500);
     }
+  };
+  componentWillUnmount = () => {
+    clearInterval(this.micInterval);
   };
   buttonClick = async e => {
     const value = e.target.value;
@@ -179,6 +324,14 @@ export default class Artificial extends Component {
       });
     }
   };
+  mute = () => {
+    this.voice.muted = !this.voice.muted;
+    if (this.voice.muted) {
+      this.muted.classList.add("muted");
+    } else {
+      this.muted.classList.remove("muted");
+    }
+  };
   render() {
     const step =
       this.state.formStep === "project"
@@ -190,7 +343,11 @@ export default class Artificial extends Component {
         <div className="wrapper">
           <div ref={ref => (this.inner = ref)} className="ai">
             <div className="icon-wrapper">
-              <div className="icon">
+              <div
+                ref={ref => (this.muted = ref)}
+                onClick={this.mute}
+                className="icon"
+              >
                 <div className="bg" ref={ref => (this.micBG = ref)} />
                 <img src={require("../assets/mic.svg")} alt="microphone" />
               </div>
