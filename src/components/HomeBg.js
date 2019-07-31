@@ -245,8 +245,8 @@ class HomeBG extends Component {
   };
   _handleDeviceOrientation = event => {
     if (event) {
-      const x = linear(event.beta, -180, 180, -1, 1);
-      const y = linear(event.gamma, -90, 90, -1, 1);
+      const x = linear(event.beta, -180, 180, -0.5, 0.5);
+      const y = linear(event.gamma, -90, 90, -0.5, 0.5);
       TweenLite.to(this.camera.rotation, 0.6, {
         x: x,
         y: y,
