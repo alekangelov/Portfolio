@@ -89,6 +89,20 @@ export default class Home extends Component {
                   });
                 }
               }}
+              onTouchStart={() => {
+                if (this.state.complete && !this.state.jojos) {
+                  this.setState({
+                    jojos: true
+                  });
+                }
+              }}
+              onTouchEnd={() => {
+                if (this.state.complete) {
+                  this.setState({
+                    jojos: false
+                  });
+                }
+              }}
             >
               {this.state.jojos ? "STAND USER" : "Dope dude"}
             </h1>

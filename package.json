@@ -9,6 +9,7 @@
     "normalize.css": "^8.0.1",
     "postprocessing": "^6.5.1",
     "react": "^16.8.6",
+    "react-compound-slider": "^2.2.0",
     "react-dom": "^16.8.6",
     "react-inview-monitor": "^2.2.1",
     "react-redux": "^7.1.0",

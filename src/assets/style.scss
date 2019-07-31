@@ -1,8 +1,19 @@
 @import url("https://fonts.googleapis.com/css?family=Muli:300,400,800,900|Rubik+Mono+One&display=swap");
 $font: "Rubik Mono One";
 
-body::-webkit-scrollbar {
-  display: none;
+$largeBreak: 768px;
+$bigBreak: 1100px;
+
+@mixin mobile {
+  @media (max-width: #{$largeBreak}) {
+    @content;
+  }
+}
+
+@mixin medium {
+  @media (max-width: #{$bigBreak}) {
+    @content;
+  }
 }
 
 h1,
@@ -94,6 +105,9 @@ ul {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      @include mobile {
+        flex-flow: column;
+      }
     }
     ul li {
       margin: 2rem 0;
@@ -107,6 +121,13 @@ ul {
         -webkit-text-stroke: 5px black;
         transition: 0.1s color, 0.5s -webkit-text-stroke;
         position: relative;
+        @include mobile {
+          font-size: 2rem;
+          -webkit-text-stroke: 1px black;
+          text-align: center;
+          width: 100%;
+          display: block;
+        }
         &.active {
           -webkit-text-stroke: 0px black;
           color: black;
@@ -128,6 +149,9 @@ ul {
           position: absolute;
           width: 100%;
           height: 5px;
+          @include mobile {
+            height: 3px;
+          }
           content: "";
           background: white;
           transition: 0.2s transform;
@@ -152,6 +176,9 @@ ul {
     &_contact {
       * {
         margin: 1rem 0;
+        @include mobile {
+          text-align: center;
+        }
       }
     }
   }
@@ -187,6 +214,9 @@ ul {
   }
   h1 {
     font-size: 4rem;
+    @include mobile {
+      font-size: 2rem;
+    }
     text-transform: uppercase;
     font-weight: 100;
     font-family: $font;
@@ -352,14 +382,31 @@ a {
     position: absolute;
     top: 10rem;
     z-index: -1;
+    @include mobile {
+      top: 75px;
+      width: 100%;
+      height: 70vw;
+    }
     img {
       width: 100%;
+      @include mobile {
+        height: 100%;
+        object-fit: cover;
+      }
       position: absolute;
       transition: 0.5s opacity;
     }
   }
   &-text {
     flex: 0 1 60%;
+    @include mobile {
+      flex: 1 0 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      padding-top: 70vw;
+      background: transparent;
+    }
     width: 60%;
     margin: 0 0 0 -10%;
     background: white;
@@ -372,21 +419,38 @@ a {
       color: transparent;
       font-size: 6rem;
     }
+    p {
+      @include mobile {
+        font-size: 1rem !important;
+      }
+    }
     h2 {
       font-family: $font;
       font-weight: 100;
       -webkit-text-stroke: 1px black;
       color: transparent;
       font-size: 3rem;
+      @include mobile {
+        font-size: 2rem;
+      }
       &:hover {
         color: black;
         -webkit-text-stroke: 0px black;
+      }
+    }
+    ol,
+    ul {
+      @include mobile {
+        margin-left: 2rem !important;
       }
     }
     ol li {
       margin: 2rem 0;
       font-weight: 600;
       font-size: 1.4rem;
+      @include mobile {
+        font-size: 1rem;
+      }
       div {
         margin-top: 2rem;
         h4 {
@@ -491,6 +555,11 @@ h1.title {
 }
 
 .contact {
+  h1 {
+    @include mobile {
+      font-size: 4rem !important;
+    }
+  }
   button {
     background: none;
     color: white;
@@ -509,8 +578,16 @@ h1.title {
   h2 {
     color: white;
   }
+  p {
+    @include mobile {
+      font-size: 1rem !important;
+    }
+  }
   h2 {
     margin: 2rem 0 0 0;
+    @include mobile {
+      font-size: 1.2rem;
+    }
   }
   a {
     -webkit-text-stroke: 0;
@@ -536,6 +613,29 @@ h1.title {
       display: flex;
       flex: 1 0 100%;
       margin: 2rem 0;
+      flex-flow: wrap;
+      &_inner {
+        display: flex;
+        flex-flow: column;
+        width: 100%;
+        max-width: 600px;
+        align-items: center;
+        input,
+        button,
+        textarea {
+          border: 1px solid black;
+          border-radius: 2rem;
+          padding: 1rem 2rem;
+          flex: 1 0 100%;
+          max-width: 550px;
+          background: white;
+          width: 100%;
+          margin: 1rem 0;
+        }
+        textarea {
+          min-height: 120px;
+        }
+      }
     }
     .bg {
       position: absolute;
@@ -558,6 +658,9 @@ h1.title {
     border: 1px solid black;
     border-radius: 10rem;
     transition: 0.5s color, 0.5s background;
+    @include mobile {
+      margin: 1rem;
+    }
     cursor: pointer;
     &:hover {
       background: black;

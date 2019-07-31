@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { TweenLite, Power4, TweenMax } from "gsap";
 import InViewMonitor from "react-inview-monitor";
 
@@ -304,7 +304,6 @@ export default class About extends Component {
               <Experience />
             </OnView>
             <OnView onInView={() => this.setState({ index: 2 })}>
-              {" "}
               <Jobs />
             </OnView>
             <OnView
@@ -314,7 +313,6 @@ export default class About extends Component {
                 this.setState({ index: 3 });
               }}
             >
-              {" "}
               <Me />
             </OnView>
           </div>
@@ -325,29 +323,34 @@ export default class About extends Component {
 }
 
 const OnView = ({ children, onInView }) => {
+  const [hasntHappened = true, setHasntHappened] = useState(true);
+  console.log(hasntHappened);
   return (
     <InViewMonitor
       classNameInView="noOpacity"
       classNameNotInView="noOpacity"
       repeatOnInView={true}
       onInView={e => {
+        setHasntHappened(false);
         if (onInView) {
           onInView();
         }
-        TweenMax.set(e.target, {
-          opacity: 1
-        });
-        TweenMax.staggerFrom(
-          e.target.childNodes,
-          1,
-          {
-            y: 200,
-            opacity: 0,
-            ease: Power4.easeOut,
-            clearProps: "all"
-          },
-          0.1
-        );
+        if (hasntHappened) {
+          TweenMax.set(e.target, {
+            opacity: 1
+          });
+          TweenMax.staggerFrom(
+            e.target.childNodes,
+            1,
+            {
+              y: 200,
+              opacity: 0,
+              ease: Power4.easeOut,
+              clearProps: "all"
+            },
+            0.1
+          );
+        }
       }}
     >
       {children}
