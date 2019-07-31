@@ -2,8 +2,6 @@ import React, { Component, useState } from "react";
 import { TweenLite, Power4, TweenMax } from "gsap";
 import InViewMonitor from "react-inview-monitor";
 
-console.warn = null;
-
 const Intro = () => (
   <>
     <h1 className="title">ABOUT</h1>
@@ -172,7 +170,10 @@ const Jobs = () => (
         <div>
           <ol>
             <li>
-              EZCoach Beta - <a href="#">(on request)</a>
+              EZCoach Beta -{" "}
+              <a onClick={e => e.preventDefault()} href="#">
+                (on request)
+              </a>
               <div>
                 <p>
                   A React Native app that focuses on fitness. Buying workouts,
@@ -183,7 +184,10 @@ const Jobs = () => (
               </div>
             </li>
             <li>
-              Personal Portfolio <a href="#">(you're looking at it)</a>
+              Personal Portfolio{" "}
+              <a href="#" onClick={e => e.preventDefault()}>
+                (you're looking at it)
+              </a>
               <div>
                 <p>
                   I redesign and redevelop this every couple of months. I
@@ -289,6 +293,7 @@ export default class About extends Component {
                 <img
                   key={i}
                   src={image}
+                  alt={"Image of Alek Angelov " + i}
                   style={{
                     opacity: this.state.index === i ? 1 : 0
                   }}

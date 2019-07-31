@@ -502,6 +502,7 @@ h1.title {
     &:after {
       background: black;
       -webkit-background-clip: text;
+      background-clip: text;
     }
   }
   position: relative;
