@@ -669,3 +669,26 @@ h1.title {
     }
   }
 }
+
+#loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: white;
+  display: flex;
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  circle {
+    stroke-dashoffset: 0;
+    stroke: black;
+    stroke-width: 3px;
+  }
+  #bar {
+    stroke: white;
+    stroke-width: 4px;
+  }
+}
