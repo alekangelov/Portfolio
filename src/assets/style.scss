@@ -568,11 +568,12 @@ h1.title {
     margin: 2rem 0;
     border: 1px solid white;
     border-radius: 10rem;
-    transition: 0.5s color, 0.5s background;
+    transition: 0.5s color, 0.5s background, 0.5s box-shadow;
     cursor: pointer;
     &:hover {
       background: white;
       color: black;
+      box-shadow: 0 10px 40px -20px white;
     }
   }
   p,
@@ -708,5 +709,39 @@ h1.title {
   #bar {
     stroke: white;
     stroke-width: 4px;
+  }
+}
+
+.socials {
+  display: flex;
+  .social-icon {
+    padding: 20px;
+    border: 1px solid white;
+    margin-top: 1rem;
+    transition: background 0.2s, 0.2s box-shadow;
+    &:first-child {
+      margin-right: 1rem;
+    }
+    position: relative;
+    img {
+      filter: invert(1);
+      height: 20px;
+      width: 20px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      transition: filter 0.2s;
+    }
+    border-radius: 100%;
+    &:active {
+      filter: brightness(0.5);
+    }
+    &:hover {
+      background: white;
+      img {
+        filter: invert(0);
+      }
+    }
   }
 }

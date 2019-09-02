@@ -49,6 +49,18 @@ class Contact extends Component {
           <p>
             <a href="mailto:alekangelov@outlook.com">alekangelov@outlook.com</a>
           </p>
+          <h2>Socials</h2>
+          <div className="socials">
+            <a
+              className="social-icon"
+              href="https://instagram.com/angelov.alek"
+            >
+              <img src={require("../assets/ig.svg")}></img>
+            </a>
+            <a className="social-icon" href="https://behance.net/alekangelov">
+              <img src={require("../assets/be.svg")}></img>
+            </a>
+          </div>
           <button onClick={this.GoTOAI}>Got a project in mind?</button>
         </div>
       </div>
