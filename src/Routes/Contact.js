@@ -47,7 +47,9 @@ class Contact extends Component {
           </p>
           <h2>Email</h2>
           <p>
-            <a href="mailto:alekangelov@outlook.com">alekangelov@outlook.com</a>
+            <a href="mailto:alekangelov@icloud.com">
+              alekangelov[at]icloud.com
+            </a>
           </p>
           <h2>Socials</h2>
           <div className="socials">
