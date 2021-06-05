@@ -10,9 +10,9 @@ const Intro = () => (
       <span role="img" aria-label="wave">
         👋
       </span>
-      ! I'm currently the lead Front End Developer over at{" "}
-      <a href="https://digitalpresent.io">DigitalPresent.io</a>. I'm based out
-      of Skopje with a huge emphasis on animation, UI/UX and interaction design.
+      ! I'm currently a Senior Front End Developer over at{" "}
+      <a href="https://endava.com">ENDAVA</a>. I'm based out of Skopje with a
+      huge emphasis on building scalable, user-centric software solutions.
     </p>
     <h2>Skills</h2>
     <p>
@@ -138,9 +138,23 @@ const Jobs = () => (
 
     <ol>
       <li>
-        Digital Present | January 2019 - Present
+        Endava | December 2020 - Present
         <div>
-          <h4>Lead Front End Engineer</h4>
+          <h4>Senior Front End Developer</h4>
+          <p>
+            At Endava, my job is to biuld scalable, user centric software
+            solutions that run on the web. It's a constant struggle juggling
+            between mentoring juniors/graduates and doing work on the project
+            I'm working on, but it's fun to always look for different solutions
+            at tackling the problem. Currently working for one of the biggest
+            broking systems in Europe.
+          </p>
+        </div>
+      </li>
+      <li>
+        Digital Present | January 2019 - December 2020
+        <div>
+          <h4>Lead Front End Developer</h4>
           <p>
             At a digital agency, you're tasking with a lot of different jobs. I
             have to figure out what's the best for the job, prototype it and
@@ -166,26 +180,12 @@ const Jobs = () => (
         </div>
       </li>
       <li>
-        Freelancing
+        Freelancing/Open Source
         <div>
           <ol>
             <li>
-              EZCoach Beta -{" "}
-              <a onClick={e => e.preventDefault()} href="#">
-                (on request)
-              </a>
-              <div>
-                <p>
-                  A React Native app that focuses on fitness. Buying workouts,
-                  tracking workouts and sharing workouts. I made a fully
-                  functional beta app but backed off of the project because of
-                  incompetent backend developers.
-                </p>
-              </div>
-            </li>
-            <li>
               Personal Portfolio{" "}
-              <a href="#" onClick={e => e.preventDefault()}>
+              <a href="#" onClick={(e) => e.preventDefault()}>
                 (you're looking at it)
               </a>
               <div>
@@ -193,6 +193,67 @@ const Jobs = () => (
                   I redesign and redevelop this every couple of months. I
                   decided to go for React and a static site generator route for
                   the current iteration.
+                </p>
+              </div>
+            </li>
+            <li>
+              NT Dashboard
+              <a href="https://github.com/alekangelov/nt-dashboard">
+                https://github.com/alekangelov/nt-dashboard
+              </a>
+              <div>
+                <p>
+                  Open source new tab dashboard project written in TypeScript.
+                  It's the most gorgeous, customizable new tab you're ever going
+                  to get!
+                </p>
+              </div>
+            </li>
+            <li>
+              Unreal Store Remake with Electron
+              <a href="https://github.com/alekangelov/electron-game-launcher">
+                https://github.com/alekangelov/electron-game-launcher
+              </a>
+              <div>
+                <p>
+                  An electron based games launcher using web tech to make
+                  something that looks like the Unreal Store, but works better.
+                </p>
+              </div>
+            </li>
+            <li>
+              React Circumastance
+              <a href="https://github.com/alekangelov/react-circumstance">
+                https://github.com/alekangelov/react-circumstance
+              </a>
+              <div>
+                <p>An open-source ready-made context menu for React!</p>
+              </div>
+            </li>
+            <li>
+              React Alert Async
+              <a href="https://github.com/alekangelov/react-alert-async">
+                https://github.com/alekangelov/react-alert-async
+              </a>
+              <div>
+                <p>
+                  An open-source library replacing the default browser prompts
+                  with custom ones!
+                </p>
+              </div>
+            </li>
+            <li>
+              Zaibatsu Bud
+              <a href="https://github.com/alekangelov/zaibatsu-bud_app">
+                https://github.com/alekangelov/zaibatsu-bud_app
+              </a>
+              <div>
+                <p>
+                  An open-source project that helps you practice combos in
+                  Tekken. It's based on Electron and React and uses the latest
+                  tech in order to save/export/import and parse combos (written
+                  in Standard Tekken Notation) into visual representations of
+                  input strings.
                 </p>
               </div>
             </li>
@@ -205,8 +266,7 @@ const Jobs = () => (
                 <p>
                   An open-source text splitter project I started, but with a
                   couple of twists. Came out of necessity. I had over 300
-                  downloads on NPM the first week. I'm actively maintaining it
-                  and I hope that people will learn from it and use it.
+                  downloads on NPM the first week.
                 </p>
               </div>
             </li>
@@ -250,9 +310,9 @@ export default class About extends Component {
       require("../assets/pic1.jpg"),
       require("../assets/pic2.jpg"),
       require("../assets/pic3.jpg"),
-      require("../assets/pic4.jpg")
+      require("../assets/pic4.jpg"),
     ],
-    index: 0
+    index: 0,
   };
   componentDidMount() {
     document.title = "What I'm About. -Alek";
@@ -261,7 +321,7 @@ export default class About extends Component {
       y: 200,
       opacity: 0,
       clearProps: "all",
-      ease: Power4.easeOut
+      ease: Power4.easeOut,
     });
   }
   monologue = new Audio(require("../assets/monologue.mp3"));
@@ -273,21 +333,21 @@ export default class About extends Component {
       onComplete: () => {
         this.monologue.pause();
         this.monologue = null;
-      }
+      },
     });
   }
 
-  onScroll = e => {
+  onScroll = (e) => {
     TweenLite.to(this.image, 2, {
       y: window.pageYOffset,
-      ease: Power4.easeOut
+      ease: Power4.easeOut,
     });
   };
   render() {
     return (
       <div className="full">
         <div className="wrapper about">
-          <div className="about-image" ref={ref => (this.image = ref)}>
+          <div className="about-image" ref={(ref) => (this.image = ref)}>
             {this.state.images.map((image, i) => {
               return (
                 <img
@@ -295,7 +355,7 @@ export default class About extends Component {
                   src={image}
                   alt={"Image of Alek Angelov " + i}
                   style={{
-                    opacity: this.state.index === i ? 1 : 0
+                    opacity: this.state.index === i ? 1 : 0,
                   }}
                 />
               );
@@ -334,14 +394,14 @@ const OnView = ({ children, onInView }) => {
       classNameInView="noOpacity"
       classNameNotInView="noOpacity"
       repeatOnInView={true}
-      onInView={e => {
+      onInView={(e) => {
         setHasntHappened(false);
         if (onInView) {
           onInView();
         }
         if (hasntHappened) {
           TweenMax.set(e.target, {
-            opacity: 1
+            opacity: 1,
           });
           TweenMax.staggerFrom(
             e.target.childNodes,
@@ -350,7 +410,7 @@ const OnView = ({ children, onInView }) => {
               y: 200,
               opacity: 0,
               ease: Power4.easeOut,
-              clearProps: "all"
+              clearProps: "all",
             },
             0.1
           );

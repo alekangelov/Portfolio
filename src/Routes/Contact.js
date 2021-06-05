@@ -12,7 +12,7 @@ class Contact extends Component {
       {
         y: 200,
         opacity: 0,
-        ease: Power4.easeOut
+        ease: Power4.easeOut,
       },
       0.05
     );
@@ -25,14 +25,14 @@ class Contact extends Component {
       ease: Power4.easeOut,
       onComplete: () => {
         this.props.history.push("/ai");
-      }
+      },
     });
   };
   render() {
     return (
-      <div className="full" ref={ref => (this.full = ref)}>
+      <div className="full" ref={(ref) => (this.full = ref)}>
         <Background />
-        <div ref={ref => (this.inner = ref)} className="contact wrapper">
+        <div ref={(ref) => (this.inner = ref)} className="contact wrapper">
           <h1 className="title invert">CONTACT</h1>
           <h2>Address</h2>
           <p>
@@ -61,6 +61,9 @@ class Contact extends Component {
             </a>
             <a className="social-icon" href="https://behance.net/alekangelov">
               <img src={require("../assets/be.svg")}></img>
+            </a>
+            <a className="social-icon" href="https://github.com/aleknagelov">
+              <img src={require("../assets/gh.svg")}></img>
             </a>
           </div>
           <button onClick={this.GoTOAI}>Got a project in mind?</button>

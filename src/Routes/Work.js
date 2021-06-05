@@ -9,7 +9,7 @@ class Project extends Component {
     TweenLite.set(this.video, {
       x: window.innerWidth / 2 - width / 2,
       y: top + wrapperHeight / 2 - height / 2,
-      ease: Power4.easeOut
+      ease: Power4.easeOut,
     });
     TweenMax.staggerFrom(
       this.text.childNodes,
@@ -18,33 +18,33 @@ class Project extends Component {
         y: 200,
         opacity: 0,
         ease: Power4.easeOut,
-        clearProps: "all"
+        clearProps: "all",
       },
       0.1
     );
   }
-  mouseMove = e => {
+  mouseMove = (e) => {
     e.persist();
     const { width, height } = this.actual.getBoundingClientRect();
     TweenLite.to(this.video, 1, {
       x: e.pageX - width / 2,
       y: e.pageY - height / 2,
-      ease: Power4.easeOut
+      ease: Power4.easeOut,
     });
   };
   render() {
     return (
       <div
-        ref={ref => (this.wrapper = ref)}
+        ref={(ref) => (this.wrapper = ref)}
         className="projects-single"
         onMouseMove={this.mouseMove}
       >
-        <div className="img" ref={ref => (this.video = ref)}>
-          <video loop ref={ref => (this.actual = ref)} autoPlay>
-            <source src={this.props.video} type="video/mp4" />>
+        <div className="img" ref={(ref) => (this.video = ref)}>
+          <video loop ref={(ref) => (this.actual = ref)} autoPlay>
+            <source src={this.props.video} type="video/mp4" />
           </video>
         </div>
-        <div ref={ref => (this.text = ref)} className="projects-text">
+        <div ref={(ref) => (this.text = ref)} className="projects-text">
           <h1>{this.props.title}</h1>
           <p>{this.props.text}</p>
           {this.props.link ? <a href={this.props.link}>Visit Project</a> : null}
@@ -66,7 +66,7 @@ export default class Work extends Component {
         y: 200,
         opacity: 0,
         ease: Power4.easeOut,
-        clearProps: "all"
+        clearProps: "all",
       },
       0.1
     );
@@ -76,7 +76,7 @@ export default class Work extends Component {
     return (
       <div className="full">
         <div className="wrapper">
-          <div className="projects" ref={ref => (this.projects = ref)}>
+          <div className="projects" ref={(ref) => (this.projects = ref)}>
             {Projects.map((x, i) => {
               return <Project key={i} {...x} />;
             })}
